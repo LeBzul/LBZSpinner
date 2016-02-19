@@ -79,10 +79,14 @@ https://appetize.io/app/m4gbf5ghpyh4bw4vpdcjxgk218?device=iphone5s&scale=75&orie
 ## Images example
 
 Example 1 : 
+
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/spinner_gray.png)
+
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_gray.png)
+
 Example 2 : 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/spinner_orange.png)
+
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_orange.png)
 
 
