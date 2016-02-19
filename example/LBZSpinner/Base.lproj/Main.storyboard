@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LBZSpinner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-F0-nWc" customClass="LBZSpinner" customModule="LBZSpinner">
+                                <rect key="frame" x="180" y="278" width="240" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="eop-Og-BdQ"/>
+                                    <constraint firstAttribute="height" constant="45" id="ktc-ht-4l5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.29411764709999999" green="0.46666666670000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" red="0.0" green="0.66734647089999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLTextColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dDLStroke" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLStrokeColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="dDLMaxSize">
+                                        <real key="value" value="250"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ES-Od-nKQ" customClass="LBZSpinner" customModule="LBZSpinner">
+                                <rect key="frame" x="180" y="183" width="240" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="NJh-co-vtx"/>
+                                    <constraint firstAttribute="height" constant="50" id="dIO-26-9Bk"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByC-JU-eu9" customClass="LBZSpinner" customModule="LBZSpinner">
+                                <rect key="frame" x="180" y="362" width="240" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="EgG-40-AWM"/>
+                                    <constraint firstAttribute="height" constant="50" id="Q0Q-Ku-S1j"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.97254901959999995" green="0.62352941179999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="No value"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLColor">
+                                        <color key="value" red="0.95686274510000002" green="0.70196078429999997" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dDLStroke" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dDLStrokeColor">
+                                        <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="dDLStrokeSize">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dDLblurEnable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="dDLMaxSize">
+                                        <real key="value" value="300"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Q0Q-Ku-S1j"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4JP-F0-nWc" firstAttribute="leading" secondItem="8ES-Od-nKQ" secondAttribute="leading" id="5ZY-pR-oud"/>
+                            <constraint firstItem="ByC-JU-eu9" firstAttribute="leading" secondItem="4JP-F0-nWc" secondAttribute="leading" id="6tF-gv-MgM"/>
+                            <constraint firstItem="ByC-JU-eu9" firstAttribute="trailing" secondItem="4JP-F0-nWc" secondAttribute="trailing" id="DvT-6V-Afr"/>
+                            <constraint firstItem="ByC-JU-eu9" firstAttribute="top" secondItem="4JP-F0-nWc" secondAttribute="bottom" constant="39" id="FNC-tz-05g"/>
+                            <constraint firstItem="4JP-F0-nWc" firstAttribute="trailing" secondItem="8ES-Od-nKQ" secondAttribute="trailing" id="J0Y-VA-Ua8"/>
+                            <constraint firstItem="ByC-JU-eu9" firstAttribute="height" secondItem="4JP-F0-nWc" secondAttribute="height" id="Uam-pA-fIC"/>
+                            <constraint firstItem="ByC-JU-eu9" firstAttribute="width" secondItem="4JP-F0-nWc" secondAttribute="width" id="Wub-x3-U75"/>
+                            <constraint firstItem="4JP-F0-nWc" firstAttribute="top" secondItem="8ES-Od-nKQ" secondAttribute="bottom" constant="45" id="hYT-Vf-TXG"/>
+                            <constraint firstItem="4JP-F0-nWc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="tQB-mJ-Hgh"/>
+                            <constraint firstItem="4JP-F0-nWc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zQm-x3-8SH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="spinnerBot" destination="ByC-JU-eu9" id="lcP-Vf-0aA"/>
+                        <outlet property="spinnerMid" destination="4JP-F0-nWc" id="DgU-Mt-QQC"/>
+                        <outlet property="spinnerTop" destination="8ES-Od-nKQ" id="zAl-6t-eVn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="273" y="337"/>
+        </scene>
+    </scenes>
+</document>
