@@ -53,7 +53,7 @@ spinnerCode.updateList(listCode)
 ```
 
 #### Configure Delegate
-For use LBZSpinnerDelegate for event return :
+Use LBZSpinnerDelegate for event return :
 
 ###### Declare use LBZSpinnerDelegate :
 ```Swift
@@ -66,7 +66,7 @@ spinnerCode.delegate = self
 ###### Event return method :
 ```Swift
   func spinnerChoose(spinner:LBZSpinner, index:Int,value:String) {
-        print("Spinner : \(LBZSpinner) : { Index : \(index) - \(value) }")
+        print("Spinner : \(spinner) : { Index : \(index) - \(value) }")
     }
 ```  
 
@@ -85,6 +85,7 @@ Example 1 :
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_gray.png)
 
 Example 2 : 
+
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/spinner_orange.png)
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_orange.png)
