@@ -74,19 +74,23 @@ func spinnerChoose(spinner:LBZSpinner, index:Int,value:String) {
 ```  
 
 ###### Get/Set index :
-####### Get actual selected index :
+ 
+ Get actual selected index :
 ```Swift
 var index = spinnerBot.selectedIndex
 ```  
 
-####### if no selected value :
+if no selected value :
+```Swift
 if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
     print("NOTHING VALUE")
 }
+```  
 
-####### Set actual selected index :
+ Set actual selected index :
+```Swift
 spinnerBot.selectedIndex = 1
-
+```  
 
 
 ## Images example
