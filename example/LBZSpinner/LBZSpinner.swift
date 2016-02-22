@@ -16,6 +16,9 @@ import UIKit
     let heightTableviewCell:CGFloat = 45
     var heightTableview:CGFloat = 200
 
+    //public variable
+    static var INDEX_NOTHING = 0
+    var selectedIndex = INDEX_NOTHING { didSet{ refreshValue() } }
 
     //spinner
     @IBInspectable var textColor: UIColor = UIColor.grayColor() { didSet{ updateUI() } }
@@ -39,11 +42,11 @@ import UIKit
 
     var delegate:LBZSpinnerDelegate!
 
-    var labelValue: UILabel!
-    var blurEffectView:UIVisualEffectView!
-    var viewChooseDisable: UIView!
-    var tableviewChoose: UITableView!
-    var tableviewChooseShadow: UIView!
+    private var labelValue: UILabel!
+    private var blurEffectView:UIVisualEffectView!
+    private var viewChooseDisable: UIView!
+    private var tableviewChoose: UITableView!
+    private var tableviewChooseShadow: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,6 +87,17 @@ import UIKit
         }
         
         drawCanvas(frame: rect)
+    }
+
+    private func refreshValue() {
+        if list.count > selectedIndex {
+            text = list[selectedIndex]
+            updateUI()
+            if (delegate != nil) {
+                delegate.spinnerChoose(self,index: selectedIndex, value: list[selectedIndex])
+            }
+
+        }
     }
 
     private func updateUI() {
@@ -318,13 +332,12 @@ import UIKit
     /** 
      * TableView Delegate method
      **/
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         labelValue.text = list[indexPath.row]
         if (delegate != nil) {
             delegate.spinnerChoose(self,index: indexPath.row, value: list[indexPath.row])
         }
-
+        selectedIndex = indexPath.row
         closeSpinner()
     }
 

@@ -4,6 +4,9 @@
 
 # LBZSpinner
 Simple Spinner with dropdown-list for iOS (like android)
+###### Demo
+View live demo in Appetize :
+https://appetize.io/app/m4gbf5ghpyh4bw4vpdcjxgk218?device=iphone5s&scale=75&orientation=portrait&osVersion=9.2
 
 ## Installation / Usage
 
@@ -65,15 +68,25 @@ spinnerCode.delegate = self
 ```  
 ###### Event return method :
 ```Swift
-  func spinnerChoose(spinner:LBZSpinner, index:Int,value:String) {
-        print("Spinner : \(spinner) : { Index : \(index) - \(value) }")
-    }
+func spinnerChoose(spinner:LBZSpinner, index:Int,value:String) {
+    print("Spinner : \(spinner) : { Index : \(index) - \(value) }")
+}
 ```  
 
-## Demo
-View live demo in Appetize :
+###### Get/Set index :
+####### Get actual selected index :
+```Swift
+var index = spinnerBot.selectedIndex
+```  
 
-https://appetize.io/app/m4gbf5ghpyh4bw4vpdcjxgk218?device=iphone5s&scale=75&orientation=portrait&osVersion=9.2
+####### if no selected value :
+if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
+    print("NOTHING VALUE")
+}
+
+####### Set actual selected index :
+spinnerBot.selectedIndex = 1
+
 
 
 ## Images example

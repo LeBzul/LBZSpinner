@@ -36,6 +36,10 @@ class ViewController: UIViewController, LBZSpinnerDelegate {
 
         createSpinnerByCode()
 
+        if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
+            print("NOTHING VALUE")
+            spinnerBot.selectedIndex = 1
+        }
     }
 
     func createSpinnerByCode() {
