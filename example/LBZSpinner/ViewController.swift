@@ -38,7 +38,7 @@ class ViewController: UIViewController, LBZSpinnerDelegate {
 
         if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
             print("NOTHING VALUE")
-            spinnerBot.selectedIndex = 1
+            spinnerBot.changeSelectedIndex(1)
         }
     }
 

@@ -89,7 +89,7 @@ if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
 
  Set actual selected index :
 ```Swift
-spinnerBot.selectedIndex = 1
+spinnerBot.changeSelectedIndex(1)
 ```  
 
 

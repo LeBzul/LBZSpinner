@@ -18,7 +18,6 @@ import UIKit
 
     //public variable
     static var INDEX_NOTHING = 0
-    var selectedIndex = INDEX_NOTHING { didSet{ refreshValue() } }
 
     //spinner
     @IBInspectable var textColor: UIColor = UIColor.grayColor() { didSet{ updateUI() } }
@@ -41,6 +40,9 @@ import UIKit
 
 
     var delegate:LBZSpinnerDelegate!
+
+    //actual seleted index
+    private(set) internal var selectedIndex = INDEX_NOTHING
 
     private var labelValue: UILabel!
     private var blurEffectView:UIVisualEffectView!
@@ -89,14 +91,14 @@ import UIKit
         drawCanvas(frame: rect)
     }
 
-    private func refreshValue() {
+    func changeSelectedIndex(index:Int) {
         if list.count > selectedIndex {
             text = list[selectedIndex]
             updateUI()
-            if (delegate != nil) {
-                delegate.spinnerChoose(self,index: selectedIndex, value: list[selectedIndex])
-            }
 
+            if (delegate != nil) {
+                delegate.spinnerChoose(self,index:selectedIndex, value: list[selectedIndex])
+            }
         }
     }
 
