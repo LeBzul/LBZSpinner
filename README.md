@@ -1,6 +1,6 @@
 
 ![Platform](https://img.shields.io/badge/Platform-iOS-green.svg)
-![Language](https://img.shields.io/badge/Language-Swift-blue.svg)
+![Language](https://img.shields.io/badge/Swift-2.3-blue.svg)
 
 # LBZSpinner
 Simple Spinner with dropdown-list for iOS (like android)
