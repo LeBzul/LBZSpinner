@@ -92,7 +92,8 @@ import UIKit
     }
 
     func changeSelectedIndex(index:Int) {
-        if list.count > selectedIndex {
+        if list.count > index {
+            selectedIndex = index
             text = list[selectedIndex]
             updateUI()
 

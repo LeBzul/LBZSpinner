@@ -12,7 +12,7 @@ import UIKit
 @IBDesignable class LBZSpinner : UIView, UITableViewDelegate, UITableViewDataSource {
 
     private var firstDraw:Bool = true
-
+    
     let heightTableviewCell:CGFloat = 45
     var heightTableview:CGFloat = 200
 
@@ -24,8 +24,8 @@ import UIKit
     @IBInspectable var lineColor: UIColor = UIColor.grayColor() { didSet{ updateUI() } }
     @IBInspectable var list:[String]  = [String]() { didSet{ updateUI() } }
     @IBInspectable var text: String = "" { didSet{ updateUI() } }
-
-
+  
+    
     //Drop down list
     @IBInspectable var dDLMaxSize: CGFloat = 200
     @IBInspectable var dDLColor: UIColor = UIColor.whiteColor()
@@ -33,7 +33,7 @@ import UIKit
     @IBInspectable var dDLStroke: Bool = true
     @IBInspectable var dDLStrokeColor: UIColor = UIColor.grayColor()
     @IBInspectable var dDLStrokeSize: CGFloat = 1
-
+    
 
     //Drop down list view back
     @IBInspectable var dDLblurEnable: Bool = true
@@ -74,12 +74,12 @@ import UIKit
         let gesture = UITapGestureRecognizer(target: self, action: "openSpinner:")
         addGestureRecognizer(gesture)
         heightTableview = heightTableviewCell*CGFloat(list.count)
-
+        
     }
 
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-
+        
         if firstDraw {
             //create spinner label
             labelValue = UILabel(frame: bounds)
@@ -87,12 +87,13 @@ import UIKit
             updateUI()
             firstDraw = false
         }
-
+        
         drawCanvas(frame: rect)
     }
 
     func changeSelectedIndex(index:Int) {
-        if list.count > selectedIndex {
+        if list.count > index {
+            selectedIndex = index
             text = list[selectedIndex]
             updateUI()
 
@@ -137,7 +138,7 @@ import UIKit
         }
     }
 
-
+    
     //Open spinner animation
     func openSpinner(sender:UITapGestureRecognizer){
 
@@ -203,7 +204,7 @@ import UIKit
             })
 
         }
-            // expand top animation
+        // expand top animation
         else {
 
             tableviewChoose = UITableView(frame:  CGRectMake(globalPoint.x , globalPoint.y, frame.size.width, self.frame.height))
@@ -224,7 +225,7 @@ import UIKit
                 },
                 completion: { finished in
             })
-
+            
         }
 
 
@@ -245,7 +246,7 @@ import UIKit
             tableviewChoose.layer.borderColor = dDLStrokeColor.CGColor
             tableviewChoose.layer.borderWidth = dDLStrokeSize
         }
-
+        
         // config shadow drop down list
         tableviewChooseShadow.backgroundColor = dDLColor
         tableviewChooseShadow.layer.shadowOpacity = 0.5;
@@ -255,7 +256,7 @@ import UIKit
         tableviewChooseShadow.layer.masksToBounds = false
         tableviewChooseShadow.clipsToBounds = false
 
-
+        
         // add to superview
         parentView.addSubview(viewChooseDisable)
         parentView.addSubview(tableviewChooseShadow)
@@ -267,7 +268,7 @@ import UIKit
 
     }
 
-
+    
     // close spinner animation
     func closeSpinner() {
 
@@ -330,8 +331,8 @@ import UIKit
         */
         closeSpinner()
     }
-
-    /**
+    
+    /** 
      * TableView Delegate method
      **/
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
