@@ -117,6 +117,8 @@ Example of dip type  and LeBzul type
 
 Guillian Drouin, drouingui@gmail.com
 
+Dip kasyap, dpd.ghimire@gmail.com (dip type added)
+
 ## License
 
 LBZSpinner is available under the Apache license. See the LICENSE file for more info.
