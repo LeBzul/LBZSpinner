@@ -95,6 +95,7 @@ spinnerBot.changeSelectedIndex(1)
 
 ## Images example
 
+
 Example 1 : 
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/spinner_gray.png)
@@ -107,6 +108,8 @@ Example 2 :
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_orange.png)
 
+Example with dip type 
+![spinner demo](https://github.com/dipkasyap/LBZSpinner/blob/master/example_images/dip_type.png)
 
 
 ## Author
