@@ -108,7 +108,8 @@ Example 2 :
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_orange.png)
 
-Example with dip type 
+Example of dip type  and LeBzul type
+
 ![spinner demo](https://github.com/dipkasyap/LBZSpinner/blob/master/example_images/dip_type.png)
 
 
