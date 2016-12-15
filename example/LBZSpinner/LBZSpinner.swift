@@ -3,15 +3,22 @@
 //  LBZSpinner
 //
 //  Created by LeBzul on 18/02/2016.
+//  Customized by dip kasyap dpd.ghimire@gmail.com
+//************ dip added type ********/
 //  Copyright © 2016 LeBzul. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
+enum SpinnerType:Int {
+    case dip = 0
+    case LeBzul = 1
+}
+
 @IBDesignable class LBZSpinner : UIView, UITableViewDelegate, UITableViewDataSource {
 
-    private var firstDraw:Bool = true
+    fileprivate var firstDraw:Bool = true
     
     let heightTableviewCell:CGFloat = 45
     var heightTableview:CGFloat = 200
@@ -20,18 +27,21 @@ import UIKit
     static var INDEX_NOTHING = 0
 
     //spinner
-    @IBInspectable var textColor: UIColor = UIColor.grayColor() { didSet{ updateUI() } }
-    @IBInspectable var lineColor: UIColor = UIColor.grayColor() { didSet{ updateUI() } }
+    @IBInspectable var textColor: UIColor = UIColor.gray { didSet{ updateUI() } }
+    @IBInspectable var lineColor: UIColor = UIColor.gray { didSet{ updateUI() } }
     @IBInspectable var list:[String]  = [String]() { didSet{ updateUI() } }
     @IBInspectable var text: String = "" { didSet{ updateUI() } }
   
+    //spinner type
+    @IBInspectable var type: Int =  SpinnerType.dip.rawValue { didSet{ updateUI() } }
+
     
     //Drop down list
     @IBInspectable var dDLMaxSize: CGFloat = 200
-    @IBInspectable var dDLColor: UIColor = UIColor.whiteColor()
-    @IBInspectable var dDLTextColor: UIColor = UIColor.grayColor()
+    @IBInspectable var dDLColor: UIColor = UIColor.white
+    @IBInspectable var dDLTextColor: UIColor = UIColor.gray
     @IBInspectable var dDLStroke: Bool = true
-    @IBInspectable var dDLStrokeColor: UIColor = UIColor.grayColor()
+    @IBInspectable var dDLStrokeColor: UIColor = UIColor.gray
     @IBInspectable var dDLStrokeSize: CGFloat = 1
     
 
@@ -42,13 +52,13 @@ import UIKit
     var delegate:LBZSpinnerDelegate!
 
     //actual seleted index
-    private(set) internal var selectedIndex = INDEX_NOTHING
+    fileprivate(set) internal var selectedIndex = INDEX_NOTHING
 
-    private var labelValue: UILabel!
-    private var blurEffectView:UIVisualEffectView!
-    private var viewChooseDisable: UIView!
-    private var tableviewChoose: UITableView!
-    private var tableviewChooseShadow: UIView!
+    fileprivate var labelValue: UILabel!
+    fileprivate var blurEffectView:UIVisualEffectView!
+    fileprivate var viewChooseDisable: UIView!
+    fileprivate var tableviewChoose: UITableView!
+    fileprivate var tableviewChooseShadow: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,29 +71,35 @@ import UIKit
     }
 
     override func prepareForInterfaceBuilder() {
-        backgroundColor = UIColor.clearColor()  // clear black background IB
+        backgroundColor = UIColor.clear  // clear black background IB
     }
 
 
 
-    private func initCustomView() {
-        backgroundColor = UIColor.clearColor()  // clear black background
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
+    fileprivate func initCustomView() {
+        backgroundColor = UIColor.clear  // clear black background
+        NotificationCenter.default.addObserver(self, selector: #selector(LBZSpinner.orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 
         //Open spinner click
-        let gesture = UITapGestureRecognizer(target: self, action: "openSpinner:")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(LBZSpinner.openSpinner(_:)))
         addGestureRecognizer(gesture)
         heightTableview = heightTableviewCell*CGFloat(list.count)
         
     }
 
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         if firstDraw {
             //create spinner label
-            labelValue = UILabel(frame: bounds)
+            var frame = bounds
+            frame.origin = CGPoint(x: frame.origin.x + 10, y: frame.origin.y)
+            
+            labelValue = UILabel(frame: frame)
             addSubview(labelValue)
+            
+            //labelValue.backgroundColor = UIColor.gray
+            
             updateUI()
             firstDraw = false
         }
@@ -91,7 +107,7 @@ import UIKit
         drawCanvas(frame: rect)
     }
 
-    func changeSelectedIndex(index:Int) {
+    func changeSelectedIndex(_ index:Int) {
         if list.count > index {
             selectedIndex = index
             text = list[selectedIndex]
@@ -103,7 +119,7 @@ import UIKit
         }
     }
 
-    private func updateUI() {
+    fileprivate func updateUI() {
         if (labelValue != nil) {
             labelValue.text = text
             labelValue.textColor = textColor
@@ -112,14 +128,14 @@ import UIKit
     }
 
     //Config spinner style
-    func decoratedSpinner(textColor:UIColor!,lineColor:UIColor!,text:String!) {
+    func decoratedSpinner(_ textColor:UIColor!,lineColor:UIColor!,text:String!) {
         if(textColor != nil) { self.textColor=textColor }
         if(lineColor != nil) { self.lineColor=lineColor }
         if(text != nil) { self.text=text }
     }
 
     //Config drop down list style
-    func decoratedDropDownList(backgroundColor:UIColor!,textColor:UIColor!,withStroke:Bool!,strokeSize:CGFloat!,strokeColor:UIColor!) {
+    func decoratedDropDownList(_ backgroundColor:UIColor!,textColor:UIColor!,withStroke:Bool!,strokeSize:CGFloat!,strokeColor:UIColor!) {
 
         if(backgroundColor != nil) { dDLColor=backgroundColor }
         if(textColor != nil) { dDLTextColor=textColor }
@@ -130,7 +146,7 @@ import UIKit
 
 
     //Update drop down list
-    func updateList(list:[String]) {
+    func updateList(_ list:[String]) {
         self.list = list;
         heightTableview = heightTableviewCell*CGFloat(list.count)
         if(tableviewChoose != nil) {
@@ -140,20 +156,20 @@ import UIKit
 
     
     //Open spinner animation
-    func openSpinner(sender:UITapGestureRecognizer){
+    func openSpinner(_ sender:UITapGestureRecognizer){
 
         heightTableview = heightTableviewCell*CGFloat(list.count)
         let parentView = findLastUsableSuperview()
-        let globalPoint = convertPoint(bounds.origin, toView:parentView) // position spinner in superview
+        let globalPoint = convert(bounds.origin, to:parentView) // position spinner in superview
 
         viewChooseDisable = UIView(frame: parentView.frame) // view back click
 
         if(dDLblurEnable) {  // with blur effect
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
             blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView.alpha = 0 // blur effect alpha
             blurEffectView.frame = viewChooseDisable.bounds
-            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             viewChooseDisable.addSubview(blurEffectView)
         }
 
@@ -185,12 +201,12 @@ import UIKit
 
         // expand bottom animation
         if (expandBottomDirection) {
-            tableviewChoose = UITableView(frame:  CGRectMake(globalPoint.x , globalPoint.y, frame.size.width, 0))
+            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x , y: globalPoint.y, width: frame.size.width, height: 0))
             tableviewChooseShadow = UIView(frame: tableviewChoose.frame)
 
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 delay: 0.0,
-                options: UIViewAnimationOptions.TransitionFlipFromBottom,
+                options: UIViewAnimationOptions.transitionFlipFromBottom,
                 animations: {
                     self.tableviewChoose.frame.size.height = self.heightTableview
                     self.tableviewChooseShadow.frame.size.height = self.heightTableview
@@ -207,12 +223,12 @@ import UIKit
         // expand top animation
         else {
 
-            tableviewChoose = UITableView(frame:  CGRectMake(globalPoint.x , globalPoint.y, frame.size.width, self.frame.height))
+            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x , y: globalPoint.y, width: frame.size.width, height: self.frame.height))
             tableviewChooseShadow = UIView(frame: tableviewChoose.frame)
 
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 delay: 0.0,
-                options: UIViewAnimationOptions.TransitionFlipFromBottom,
+                options: UIViewAnimationOptions.transitionFlipFromBottom,
                 animations: {
                     self.tableviewChoose.frame.origin.y = globalPoint.y-self.heightTableview+self.frame.height
                     self.tableviewChoose.frame.size.height = self.heightTableview
@@ -234,23 +250,23 @@ import UIKit
         tableviewChoose.tableFooterView = UIView() //Eliminate Extra separators below UITableView
         tableviewChoose.delegate = self
         tableviewChoose.dataSource = self
-        tableviewChoose.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
-        tableviewChoose.userInteractionEnabled = true
+        tableviewChoose.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        tableviewChoose.isUserInteractionEnabled = true
         tableviewChoose.showsHorizontalScrollIndicator = false
         tableviewChoose.showsVerticalScrollIndicator = false
-        tableviewChoose.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableviewChoose.separatorStyle = UITableViewCellSeparatorStyle.none
         tableviewChoose.layer.cornerRadius = 5
 
         //Show stroke
         if(dDLStroke) {
-            tableviewChoose.layer.borderColor = dDLStrokeColor.CGColor
+            tableviewChoose.layer.borderColor = dDLStrokeColor.cgColor
             tableviewChoose.layer.borderWidth = dDLStrokeSize
         }
         
         // config shadow drop down list
         tableviewChooseShadow.backgroundColor = dDLColor
         tableviewChooseShadow.layer.shadowOpacity = 0.5;
-        tableviewChooseShadow.layer.shadowOffset = CGSizeMake(3, 3);
+        tableviewChooseShadow.layer.shadowOffset = CGSize(width: 3, height: 3);
         tableviewChooseShadow.layer.shadowRadius = 5;
         tableviewChooseShadow.layer.cornerRadius = 5
         tableviewChooseShadow.layer.masksToBounds = false
@@ -263,7 +279,7 @@ import UIKit
         parentView.addSubview(tableviewChoose)
 
         // close spinner click back
-        let gesture = UITapGestureRecognizer(target: self, action: "closeSpinner")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(LBZSpinner.closeSpinner))
         viewChooseDisable.addGestureRecognizer(gesture)
 
     }
@@ -273,9 +289,9 @@ import UIKit
     func closeSpinner() {
 
         if(tableviewChoose != nil) {
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 delay: 0.0,
-                options: UIViewAnimationOptions.TransitionFlipFromBottom,
+                options: UIViewAnimationOptions.transitionFlipFromBottom,
                 animations: {
                     self.tableviewChoose.alpha = 0.0
                     self.tableviewChooseShadow.alpha = 0.0
@@ -297,28 +313,77 @@ import UIKit
 
 
     // find usable superview
-    private func findLastUsableSuperview() -> UIView {
+    fileprivate func findLastUsableSuperview() -> UIView {
         return (window?.subviews[0])!
     }
 
 
     //draw background spinner
-    private func drawCanvas(frame frame: CGRect = CGRectMake(0, 0, 86, 11)) {
+    fileprivate func drawCanvas(frame: CGRect = CGRect(x: 0, y: 0, width: 86, height: 11)) {
+       
+        
+        
+        
         let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(CGPointMake(frame.maxX - 11, frame.maxY))
-        bezierPath.addLineToPoint(CGPointMake(frame.maxX, frame.maxY))
-        bezierPath.addLineToPoint(CGPointMake(frame.maxX, frame.maxY - 11))
-        bezierPath.addLineToPoint(CGPointMake(frame.maxX - 11, frame.maxY))
-        bezierPath.closePath()
-        bezierPath.lineCapStyle = .Square;
-        bezierPath.lineJoinStyle = .Bevel;
-
-        lineColor.setFill()
-        bezierPath.fill()
-
-        let rectanglePath = UIBezierPath(rect: CGRectMake(frame.minX, frame.minY + frame.height - 1, frame.width, 1))
-        lineColor.setFill()
-        rectanglePath.fill()
+        
+        switch type {
+        case SpinnerType.dip.rawValue:
+            
+            bezierPath.move(to: frame.origin)
+            bezierPath.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
+            bezierPath.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
+            bezierPath.addLine(to: CGPoint(x: frame.maxX, y: frame.minY))
+            bezierPath.addLine(to: frame.origin)
+            
+            
+            lineColor.setStroke()
+            bezierPath.stroke()
+            
+            let traingle = UIBezierPath()
+            
+            //make three points
+            let hMargin:CGFloat = 10.0
+            let vMargin:CGFloat = frame.height/3
+            
+            //with of traingle
+            let tWidth = frame.height - 2*vMargin
+            
+            let firstPoint = CGPoint(x: frame.width - hMargin - tWidth / sqrt(2/3), y: vMargin)
+            let secondPoint = CGPoint(x: frame.width - hMargin, y: vMargin)
+            let thirdPoint = CGPoint(x: frame.width - hMargin - tWidth / sqrt(2/3) / 2, y: vMargin + tWidth)
+            
+            traingle.move(to: firstPoint)
+            traingle.addLine(to: secondPoint)
+            traingle.addLine(to: thirdPoint)
+            traingle.close()
+            lineColor.setFill()
+            traingle.fill()
+            
+            break
+            
+        case SpinnerType.LeBzul.rawValue :
+            
+            bezierPath.move(to: CGPoint(x: frame.maxX - 11, y: frame.maxY))
+            bezierPath.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
+            bezierPath.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY - 11))
+            bezierPath.addLine(to: CGPoint(x: frame.maxX - 11, y: frame.maxY))
+            bezierPath.close()
+            bezierPath.lineCapStyle = .square;
+            bezierPath.lineJoinStyle = .bevel;
+            
+            lineColor.setFill()
+            bezierPath.fill()
+            
+            let rectanglePath = UIBezierPath(rect: CGRect(x: frame.minX, y: frame.minY + frame.height - 1, width: frame.width, height: 1))
+            lineColor.setFill()
+            rectanglePath.fill()
+            
+            break
+            
+        default:
+            break
+        }
+       
     }
 
     func orientationChanged()
@@ -335,7 +400,7 @@ import UIKit
     /** 
      * TableView Delegate method
      **/
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         labelValue.text = list[indexPath.row]
         if (delegate != nil) {
             delegate.spinnerChoose(self,index: indexPath.row, value: list[indexPath.row])
@@ -344,18 +409,18 @@ import UIKit
         closeSpinner()
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath:indexPath) as UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for:indexPath) as UITableViewCell
         cell.contentView.backgroundColor = dDLColor
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
-        cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.backgroundColor = UIColor.clear
         cell.textLabel?.text = list[indexPath.row]
         cell.textLabel?.textColor = dDLTextColor
         return cell
@@ -364,5 +429,5 @@ import UIKit
 
 
 protocol LBZSpinnerDelegate{
-    func spinnerChoose(spinner:LBZSpinner, index:Int,value:String)
+    func spinnerChoose(_ spinner:LBZSpinner, index:Int,value:String)
 }
