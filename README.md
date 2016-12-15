@@ -2,7 +2,7 @@
 ![Platform](https://img.shields.io/badge/Platform-iOS-green.svg)
 ![Language](https://img.shields.io/badge/Swift-2.3-blue.svg)
 
-# LBZSpinner
+# LBZSpinner (Supports Swift 3)
 Simple Spinner with dropdown-list for iOS (like android)
 ###### Demo
 View live demo in Appetize :
