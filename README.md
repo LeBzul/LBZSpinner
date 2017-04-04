@@ -2,7 +2,7 @@
 ![Platform](https://img.shields.io/badge/Platform-iOS-green.svg)
 ![Language](https://img.shields.io/badge/Swift-2.3-blue.svg)
 
-# LBZSpinner
+# LBZSpinner (Supports Swift 3)
 Simple Spinner with dropdown-list for iOS (like android)
 ###### Demo
 View live demo in Appetize :
@@ -95,6 +95,7 @@ spinnerBot.changeSelectedIndex(1)
 
 ## Images example
 
+
 Example 1 : 
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/spinner_gray.png)
@@ -107,11 +108,16 @@ Example 2 :
 
 ![Img](https://github.com/LeBzul/LBZSpinner/blob/master/example_images/dropdown_orange.png)
 
+Example of dip type  and LeBzul type
+
+![spinner demo](https://github.com/dipkasyap/LBZSpinner/blob/master/example_images/dip_type.png)
 
 
 ## Author
 
 Guillian Drouin, drouingui@gmail.com
+
+Dip kasyap, dpd.ghimire@gmail.com (dip type added)
 
 ## License
 

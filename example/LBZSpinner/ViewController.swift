@@ -46,16 +46,16 @@ class ViewController: UIViewController, LBZSpinnerDelegate {
         let listCode = ["Books","Video","Streaming","Download","Upload"]
         spinnerCode = LBZSpinner(frame: CGRect(x: 90,y: 30,width: 180,height: 45))
         spinnerCode.delegate = self
-        spinnerCode.textColor = UIColor.redColor()
-        spinnerCode.lineColor = UIColor.purpleColor()
-        spinnerCode.decoratedSpinner(UIColor.purpleColor(), lineColor: UIColor.brownColor(), text: "Choose value")
-        spinnerCode.decoratedDropDownList(UIColor.lightGrayColor(), textColor: UIColor.redColor(), withStroke: true, strokeSize: 5, strokeColor: nil)
+        spinnerCode.textColor = UIColor.red
+        spinnerCode.lineColor = UIColor.purple
+        spinnerCode.decoratedSpinner(UIColor.purple, lineColor: UIColor.brown, text: "Choose value")
+        spinnerCode.decoratedDropDownList(UIColor.lightGray, textColor: UIColor.red, withStroke: true, strokeSize: 5, strokeColor: nil)
         spinnerCode.updateList(listCode)
         self.view.addSubview(spinnerCode)
     }
 
 
-    func spinnerChoose(spinner:LBZSpinner, index:Int,value:String) {
+    func spinnerChoose(_ spinner:LBZSpinner, index:Int,value:String) {
         var spinnerName = ""
         if spinner == spinnerTop { spinnerName = "spinnerTop" }
         if spinner == spinnerMid { spinnerName = "spinnerMid" }
