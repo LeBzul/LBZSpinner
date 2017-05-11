@@ -7,32 +7,34 @@
 //************ dip added type ********/
 //  Copyright © 2016 LeBzul. All rights reserved.
 //
+
 import Foundation
 import UIKit
 
-enum SpinnerType: Int {
+enum SpinnerType:Int {
     case dip = 0
     case LeBzul = 1
 }
 
 @IBDesignable class LBZSpinner : UIView, UITableViewDelegate, UITableViewDataSource {
     
-    fileprivate var firstDraw: Bool = true
+    fileprivate var firstDraw:Bool = true
     
-    let heightTableviewCell: CGFloat = 45
-    var heightTableview: CGFloat = 200
+    let heightTableviewCell:CGFloat = 45
+    var heightTableview:CGFloat = 200
     
     //public variable
-    static var INDEXNOTHING = 0
+    static var INDEX_NOTHING = 0
     
     //spinner
-    @IBInspectable var textColor: UIColor = UIColor.gray { didSet { updateUI() } }
-    @IBInspectable var lineColor: UIColor = UIColor.gray { didSet { updateUI() } }
-    @IBInspectable var list: [String]  = [String]() { didSet { updateUI() } }
-    @IBInspectable var text: String = "" { didSet { updateUI() } }
+    @IBInspectable var textFont: UIFont = UIFont.systemFont(ofSize: 19.0) { didSet{ updateUI() } }
+    @IBInspectable var textColor: UIColor = UIColor.gray { didSet{ updateUI() } }
+    @IBInspectable var lineColor: UIColor = UIColor.gray { didSet{ updateUI() } }
+    @IBInspectable var list:[String]  = [String]() { didSet{ updateUI() } }
+    @IBInspectable var text: String = "" { didSet{ updateUI() } }
     
     //spinner type
-    @IBInspectable var type: Int =  SpinnerType.dip.rawValue { didSet { updateUI() } }
+    @IBInspectable var type: Int =  SpinnerType.dip.rawValue { didSet{ updateUI() } }
     
     
     //Drop down list
@@ -48,13 +50,13 @@ enum SpinnerType: Int {
     @IBInspectable var dDLblurEnable: Bool = true
     
     
-    var delegate: LBZSpinnerDelegate!
+    var delegate:LBZSpinnerDelegate!
     
     //actual seleted index
-    fileprivate(set) internal var selectedIndex = INDEXNOTHING
+    fileprivate(set) internal var selectedIndex = INDEX_NOTHING
     
     fileprivate var labelValue: UILabel!
-    fileprivate var blurEffectView: UIVisualEffectView!
+    fileprivate var blurEffectView:UIVisualEffectView!
     fileprivate var viewChooseDisable: UIView!
     fileprivate var tableviewChoose: UITableView!
     fileprivate var tableviewChooseShadow: UIView!
@@ -106,20 +108,21 @@ enum SpinnerType: Int {
         drawCanvas(frame: rect)
     }
     
-    func changeSelectedIndex(_ index: Int) {
+    func changeSelectedIndex(_ index:Int) {
         if list.count > index {
             selectedIndex = index
             text = list[selectedIndex]
             updateUI()
             
-            if delegate != nil {
-                delegate.spinnerChoose(self, index: selectedIndex, value: list[selectedIndex])
+            if (delegate != nil) {
+                delegate.spinnerChoose(self,index:selectedIndex, value: list[selectedIndex])
             }
         }
     }
     
     fileprivate func updateUI() {
-        if labelValue != nil {
+        if (labelValue != nil) {
+            labelValue.font = textFont
             labelValue.text = text
             labelValue.textColor = textColor
         }
@@ -127,41 +130,43 @@ enum SpinnerType: Int {
     }
     
     //Config spinner style
-    func decoratedSpinner(_ textColor: UIColor!, lineColor: UIColor!, text: String!) {
-        if textColor != nil { self.textColor=textColor }
-        if lineColor != nil { self.lineColor=lineColor }
-        if text != nil { self.text=text }
+    func decoratedSpinner(_ textColor:UIColor!,lineColor:UIColor!,text:String!) {
+        if(textColor != nil) { self.textColor=textColor }
+        if(lineColor != nil) { self.lineColor=lineColor }
+        if(text != nil) { self.text=text }
     }
     
     //Config drop down list style
-    func decoratedDropDownList(_ backgroundColor: UIColor!, textColor: UIColor!, withStroke: Bool!, strokeSize: CGFloat!, strokeColor: UIColor!) {
+    func decoratedDropDownList(_ backgroundColor:UIColor!,textColor:UIColor!,withStroke:Bool!,strokeSize:CGFloat!,strokeColor:UIColor!) {
         
-        if backgroundColor != nil { dDLColor=backgroundColor }
-        if textColor != nil { dDLTextColor=textColor }
-        if withStroke != nil { dDLStroke=withStroke }
-        if strokeSize != nil { dDLStrokeSize=strokeSize }
-        if strokeColor != nil { dDLStrokeColor=strokeColor }
+        if(backgroundColor != nil) { dDLColor=backgroundColor }
+        if(textColor != nil) { dDLTextColor=textColor }
+        if(withStroke != nil) { dDLStroke=withStroke }
+        if(strokeSize != nil) { dDLStrokeSize=strokeSize }
+        if(strokeColor != nil) { dDLStrokeColor=strokeColor }
     }
     
     
     //Update drop down list
-    func updateList(_ list: [String]) {
+    func updateList(_ list:[String]) {
         self.list = list;
         heightTableview = heightTableviewCell*CGFloat(list.count)
-        if tableviewChoose != nil {
+        if(tableviewChoose != nil) {
             tableviewChoose.reloadData()
         }
     }
     
     
     //Open spinner animation
-    func openSpinner(_ sender: UITapGestureRecognizer) {
+    func openSpinner(_ sender:UITapGestureRecognizer){
         
         heightTableview = heightTableviewCell*CGFloat(list.count)
         let parentView = findLastUsableSuperview()
         let globalPoint = convert(bounds.origin, to:parentView) // position spinner in superview
+        
         viewChooseDisable = UIView(frame: parentView.frame) // view back click
-        if dDLblurEnable {  // with blur effect
+        
+        if(dDLblurEnable) {  // with blur effect
             let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
             blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView.alpha = 0 // blur effect alpha
@@ -172,9 +177,9 @@ enum SpinnerType: Int {
         
         
         var expandBottomDirection = true
-        if (globalPoint.y+heightTableview) < parentView.frame.height {
+        if((globalPoint.y+heightTableview) < parentView.frame.height) {
             expandBottomDirection = true
-        } else if (globalPoint.y-heightTableview) > 0 {
+        } else if((globalPoint.y-heightTableview) > 0) {
             expandBottomDirection = false
         } else {
             
@@ -182,7 +187,7 @@ enum SpinnerType: Int {
             let margeBot = parentView.frame.height - globalPoint.y
             let margeTop =  parentView.frame.height - (parentView.frame.height - globalPoint.y)
             
-            if margeBot > margeTop {
+            if( margeBot > margeTop ) {
                 expandBottomDirection = true
                 heightTableview = margeBot - 5
             } else {
@@ -192,13 +197,13 @@ enum SpinnerType: Int {
             
         }
         
-        if heightTableview > dDLMaxSize {
+        if(heightTableview > dDLMaxSize) {
             heightTableview = dDLMaxSize
         }
         
         // expand bottom animation
-        if expandBottomDirection {
-            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x, y: globalPoint.y, width: frame.size.width, height: 0))
+        if (expandBottomDirection) {
+            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x , y: globalPoint.y, width: frame.size.width, height: 0))
             tableviewChooseShadow = UIView(frame: tableviewChoose.frame)
             
             UIView.animate(withDuration: 0.3,
@@ -213,14 +218,14 @@ enum SpinnerType: Int {
                             }
                             
             },
-                           completion: { _ in
+                           completion: { finished in
             })
             
         }
             // expand top animation
         else {
             
-            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x, y: globalPoint.y, width: frame.size.width, height: self.frame.height))
+            tableviewChoose = UITableView(frame:  CGRect(x: globalPoint.x , y: globalPoint.y, width: frame.size.width, height: self.frame.height))
             tableviewChooseShadow = UIView(frame: tableviewChoose.frame)
             
             UIView.animate(withDuration: 0.3,
@@ -236,7 +241,7 @@ enum SpinnerType: Int {
                                 self.blurEffectView.alpha = 0.5
                             }
             },
-                           completion: { _ in
+                           completion: { finished in
             })
             
         }
@@ -255,16 +260,16 @@ enum SpinnerType: Int {
         tableviewChoose.layer.cornerRadius = 5
         
         //Show stroke
-        if dDLStroke {
+        if(dDLStroke) {
             tableviewChoose.layer.borderColor = dDLStrokeColor.cgColor
             tableviewChoose.layer.borderWidth = dDLStrokeSize
         }
         
         // config shadow drop down list
         tableviewChooseShadow.backgroundColor = dDLColor
-        tableviewChooseShadow.layer.shadowOpacity = 0.5
-        tableviewChooseShadow.layer.shadowOffset = CGSize(width: 3, height: 3)
-        tableviewChooseShadow.layer.shadowRadius = 5
+        tableviewChooseShadow.layer.shadowOpacity = 0.5;
+        tableviewChooseShadow.layer.shadowOffset = CGSize(width: 3, height: 3);
+        tableviewChooseShadow.layer.shadowRadius = 5;
         tableviewChooseShadow.layer.cornerRadius = 5
         tableviewChooseShadow.layer.masksToBounds = false
         tableviewChooseShadow.clipsToBounds = false
@@ -285,7 +290,7 @@ enum SpinnerType: Int {
     // close spinner animation
     func closeSpinner() {
         
-        if tableviewChoose != nil {
+        if(tableviewChoose != nil) {
             UIView.animate(withDuration: 0.3,
                            delay: 0.0,
                            options: UIViewAnimationOptions.transitionFlipFromBottom,
@@ -294,7 +299,7 @@ enum SpinnerType: Int {
                             self.tableviewChooseShadow.alpha = 0.0
                             self.viewChooseDisable.alpha = 0.0
             },
-                           completion: { _ in
+                           completion: { finished in
                             
                             // delete dropdown list
                             self.tableviewChoose.removeFromSuperview()
@@ -339,8 +344,8 @@ enum SpinnerType: Int {
             let traingle = UIBezierPath()
             
             //make three points
-            let hMargin: CGFloat = 10.0
-            let vMargin: CGFloat = frame.height/3
+            let hMargin:CGFloat = 10.0
+            let vMargin:CGFloat = frame.height/3
             
             //with of traingle
             let tWidth = frame.height - 2*vMargin
@@ -365,8 +370,8 @@ enum SpinnerType: Int {
             bezierPath.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY - 11))
             bezierPath.addLine(to: CGPoint(x: frame.maxX - 11, y: frame.maxY))
             bezierPath.close()
-            bezierPath.lineCapStyle = .square
-            bezierPath.lineJoinStyle = .bevel
+            bezierPath.lineCapStyle = .square;
+            bezierPath.lineJoinStyle = .bevel;
             
             lineColor.setFill()
             bezierPath.fill()
@@ -383,7 +388,8 @@ enum SpinnerType: Int {
         
     }
     
-    func orientationChanged() {
+    func orientationChanged()
+    {
         /*
          if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
          {}
@@ -398,8 +404,8 @@ enum SpinnerType: Int {
      **/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         labelValue.text = list[indexPath.row]
-        if delegate != nil {
-            delegate.spinnerChoose(self, index: indexPath.row, value: list[indexPath.row])
+        if (delegate != nil) {
+            delegate.spinnerChoose(self,index: indexPath.row, value: list[indexPath.row])
         }
         selectedIndex = indexPath.row
         closeSpinner()
@@ -424,6 +430,6 @@ enum SpinnerType: Int {
 }
 
 
-protocol LBZSpinnerDelegate {
-    func spinnerChoose(_ spinner: LBZSpinner, index: Int, value: String)
+protocol LBZSpinnerDelegate{
+    func spinnerChoose(_ spinner:LBZSpinner, index:Int,value:String)
 }
