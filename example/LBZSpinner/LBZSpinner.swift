@@ -27,6 +27,7 @@ enum SpinnerType:Int {
     static var INDEX_NOTHING = 0
 
     //spinner
+    @IBInspectable var textFont: UIFont = UIFont.systemFont(ofSize: 19.0) { didSet{ updateUI() } }
     @IBInspectable var textColor: UIColor = UIColor.gray { didSet{ updateUI() } }
     @IBInspectable var lineColor: UIColor = UIColor.gray { didSet{ updateUI() } }
     @IBInspectable var list:[String]  = [String]() { didSet{ updateUI() } }
@@ -121,6 +122,7 @@ enum SpinnerType:Int {
 
     fileprivate func updateUI() {
         if (labelValue != nil) {
+            labelValue.font = textFont
             labelValue.text = text
             labelValue.textColor = textColor
         }
