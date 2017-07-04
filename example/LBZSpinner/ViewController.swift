@@ -28,6 +28,7 @@ class ViewController: UIViewController, LBZSpinnerDelegate {
 
         spinnerTop.updateList(listTop)
         spinnerMid.updateList(listMid)
+        spinnerMid.textFont = UIFont(name: "HelveticaNeue-UltraLight", size: 11)!;
         spinnerBot.updateList(listBot)
 
         spinnerTop.delegate = self
@@ -38,7 +39,9 @@ class ViewController: UIViewController, LBZSpinnerDelegate {
 
         if spinnerBot.selectedIndex == LBZSpinner.INDEX_NOTHING {
             print("NOTHING VALUE")
-            spinnerBot.changeSelectedIndex(1)
+            spinnerBot.text = "NOTHING VALUE"
+
+//            spinnerBot.changeSelectedIndex(1)
         }
     }
 

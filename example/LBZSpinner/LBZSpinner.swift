@@ -18,10 +18,12 @@ enum SpinnerType:Int {
 
 @IBDesignable class LBZSpinner : UIView, UITableViewDelegate, UITableViewDataSource {
 
-    fileprivate var firstDraw:Bool = true
     
-    let heightTableviewCell:CGFloat = 45
-    var heightTableview:CGFloat = 200
+    fileprivate var lastSuperView: UIView?
+    fileprivate var firstDraw: Bool = true
+    
+    let heightTableviewCell: CGFloat = 45
+    var heightTableview: CGFloat = 200
 
     //public variable
     static var INDEX_NOTHING = 0
@@ -30,7 +32,7 @@ enum SpinnerType:Int {
     @IBInspectable var textFont: UIFont = UIFont.systemFont(ofSize: 19.0) { didSet{ updateUI() } }
     @IBInspectable var textColor: UIColor = UIColor.gray { didSet{ updateUI() } }
     @IBInspectable var lineColor: UIColor = UIColor.gray { didSet{ updateUI() } }
-    @IBInspectable var list:[String]  = [String]() { didSet{ updateUI() } }
+    @IBInspectable var list: [String]  = [String]() { didSet{ updateUI() } }
     @IBInspectable var text: String = "" { didSet{ updateUI() } }
   
     //spinner type
@@ -56,7 +58,7 @@ enum SpinnerType:Int {
     fileprivate(set) internal var selectedIndex = INDEX_NOTHING
 
     fileprivate var labelValue: UILabel!
-    fileprivate var blurEffectView:UIVisualEffectView!
+    fileprivate var blurEffectView: UIVisualEffectView!
     fileprivate var viewChooseDisable: UIView!
     fileprivate var tableviewChoose: UITableView!
     fileprivate var tableviewChooseShadow: UIView!
@@ -316,7 +318,21 @@ enum SpinnerType:Int {
 
     // find usable superview
     fileprivate func findLastUsableSuperview() -> UIView {
-        return (window?.subviews[0])!
+        if lastSuperView == nil {
+            var lastView: UIView = self
+            var continueWhile = true
+            while continueWhile {
+                if let superView = lastView.superview {
+                    lastView = superView
+                } else {
+                    continueWhile = false
+                }
+            }
+            
+            lastSuperView = lastView
+        }
+        
+        return lastSuperView!
     }
 
 
